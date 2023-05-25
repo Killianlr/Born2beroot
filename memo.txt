@@ -1,0 +1,85 @@
+----------------------------------------------------------------------------------------
+
+password for root : Rootpassword42
+password for user : Born2beroot42
+Encryption passphrase : Passphrase42
+
+----------------------------------------------------------------------------------------
+
+Q: Pourquoi Debian?
+A: C'est plus facile à installer et à configurer qu' CentOS 
+(et je n'ai jamais utilisé CentOS avant)
+
+Q: Qu'est-ce qu'une machine virtuelle?
+A: Une machine virtuelle (VM) est une ressource informatique qui 
+utilise un logiciel plutôt qu'un ordinateur physique pour exécuter 
+des programmes et déployer des applications. Chaque machine virtuelle 
+exécute son propre système d'exploitation et fonctionne séparément 
+des autres machines virtuelles, même lorsqu'elles sont toutes en cours 
+d'exécution sur le même hôte. Par exemple, vous pouvez exécuter une machine virtuelle 
+MacOS sur un PC physique.
+
+Q: Quel est son but?
+A: Les machines virtuelles peuvent être déployées pour répondre aux besoins en puissance 
+de traitement différents, pour exécuter des logiciels qui nécessitent un système 
+d'exploitation différent ou pour tester des applications dans un environnement sécurisé 
+et isolé.
+
+Q: Comment ça fonctionne?
+A: Le fonctionnement des machines virtuelles s'appuie sur la technologie de virtualisation. 
+La virtualisation utilise un logiciel pour simuler un matériel virtuel qui permet aux 
+machines virtuelles de s'exécuter sur une seule machine hôte.
+
+Q: Quelle est la différence entre aptitude et apt?
+A: Aptitude est un gestionnaire de paquets de haut niveau tandis qu'APT est 
+un gestionnaire de paquets de bas niveau qui peut être utilisé par d'autres gestionnaires 
+de paquets de niveau supérieur
+(en savoir plus: https://www.tecmint.com/difference-between-apt-and-aptitude/)
+
+Q: Qu'est-ce qu'AppArmor?
+A: AppArmor ("Application Armor" en anglais) est un module de sécurité du noyau Linux qui 
+permet à l'administrateur système de restreindre les capacités des programmes avec des 
+profils par programme.
+(en savoir plus: https://en.wikipedia.org/wiki/AppArmor)
+
+Q: Qu'est-ce que SSH?
+A: SSH, également connu sous le nom de Secure Shell ou Secure Socket Shell, est un 
+protocole réseau qui permet aux utilisateurs, en particulier aux administrateurs système,
+d'accéder en toute sécurité à un ordinateur sur un réseau non sécurisé.
+
+-------------------------------------------------------------------------------------------
+
+|***************************************|
+| 1) lsblk                              1 <- Check partitions
+| 2) sudo aa-status                     2 <- AppArmor status
+| 3) getent group sudo                  3 <- sudo group users
+| 4) getent group user42                4 <- user42 group users
+| 5) sudo service ssh status            5 <- ssh status, yep
+| 6) sudo ufw status                    6 <- ufw status
+| 7) ssh username@ipadress -p 4242      7 <- connect to VM from your host (physical) machine via SSH
+| 8) nano /etc/sudoers.d/<filename>     8 <- yes, sudo config file. You can $ ls /etc/sudoers.d first
+| 9) nano /etc/login.defs               9 <- password expire policy
+| 10) nano /etc/pam.d/common-password  10 <- password policy
+| 11) sudo crontab -l                  11 <- cron schedule
+|***************************************|
+
+How to change hostname?
+[$sudo nano /etc/hostname]
+hostnamectl set-hostname new_hostname
+
+dpkg -l | grep sudo
+
+Where is sudo logs in /var/log/sudo?
+[$cd /var/log/sudo/00/00 && ls]
+You will see a lot of directories with names like 01 2B 9S 4D etc. They contain the logs we need.
+[$ sudo apt update]
+[$ ls]
+Now you see that we have a new directory here.
+[$ cd <nameofnewdirectory> && ls]
+[$ cat log] <- Input log
+[$ cat ttyout] <- Output log
+
+How to add and remove port 8080 in UFW?
+[$ sudo ufw allow 8080] <- allow
+[$ sudo ufw status] <- check
+[$ sudo ufw deny 8080] <- deny (yes yes)
